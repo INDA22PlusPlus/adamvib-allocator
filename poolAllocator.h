@@ -1,7 +1,7 @@
 #ifndef POOLALLOCATOR_H
 #define POOLALLOCATOR_H
 #include <stdio.h>
-
+#include <list>
 struct Part
 {
     Part *next;
@@ -21,6 +21,8 @@ class PoolAllocator
         size_t mPartsPerPool;
         Part *mAlloc = nullptr;
         Part *allocatePool(size_t size);
+        void freePool(void *ptr);
+        std::list<Part*> freeAddr;
 };
 
 #endif

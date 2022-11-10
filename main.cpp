@@ -2,6 +2,7 @@
 #include <iostream>
 
 struct PoolObject {
+    // example data
     int data[5];
     bool aBool;
 
@@ -16,9 +17,10 @@ struct PoolObject {
     }
 };
 
+// Number of parts per pool
 PoolAllocator PoolObject::poolAllocator{8};
 
-void usePoolAllocator() {
+void testPoolAllocator() {
     // Number of pointers to store
     int objectSize = 10;
  
@@ -34,7 +36,7 @@ void usePoolAllocator() {
 }
 
 int main() {
-    usePoolAllocator();
+    testPoolAllocator();
 
     return 0;
 }
