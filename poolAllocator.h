@@ -2,6 +2,7 @@
 #define POOLALLOCATOR_H
 #include <stdio.h>
 #include <list>
+#include <queue>
 struct Part
 {
     Part *next;
@@ -14,15 +15,16 @@ class PoolAllocator
 
         void *allocate(size_t size);
         void deallocate(void *ptr, size_t size);
+        void freePools();
 
         struct PoolObject;
 
     private:
         size_t mPartsPerPool;
         Part *mAlloc = nullptr;
-        Part *allocatePool(size_t size);
-        void freePool(void *ptr);
-        std::list<Part*> freeAddr;
+        void allocatePool(size_t size);
+        std::queue<Part*> freeAddr;
+        std::list<void*> PoolBeginings;
 };
 
 #endif

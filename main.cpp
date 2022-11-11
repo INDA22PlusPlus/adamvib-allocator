@@ -18,7 +18,7 @@ struct PoolObject {
 };
 
 // Number of parts per pool
-PoolAllocator PoolObject::poolAllocator{8};
+PoolAllocator PoolObject::poolAllocator{4};
 
 void testPoolAllocator() {
     // Number of pointers to store
@@ -28,8 +28,9 @@ void testPoolAllocator() {
     
     for (int i = 0; i < objectSize; ++i) {
         objects[i] = new PoolObject();
+        std::cout << objects[i] << "\n";
     }
-        
+
     for (int i = objectSize; i >= 0; --i) {
         delete objects[i];
     }
@@ -37,6 +38,9 @@ void testPoolAllocator() {
 
 int main() {
     testPoolAllocator();
+
+    // Deallocate all pools
+    PoolObject::poolAllocator.freePools();
 
     return 0;
 }
